@@ -43,7 +43,8 @@ Copy all of files in the directory /backup:
     │   ├── libconfig.sh        # bash lib for read config file
     │   ├── libbash.sh          # bash lib misc functions
     │   ├── libbackup.sh        # bash lib backup routines
-    │   └── backup.sh           # the backup script
+    │   ├── backup.sh           # the backup script
+    │   └── restore.sh          # the restore script
     └── backup.conf             # global config variables
 
 ### Add backup user
@@ -139,10 +140,10 @@ The backup list is a comma splitted list of the backup config block, the format 
 
     <name>  <type> <backup callback> <restore callback> <data dir>
 
-  * <name> is the name of backup
-  * <type> is either 'f' or 'd' for file and directory. it depends on the implementation of callback functions
-  * <backup callback>,<restore callback> is the bash callback function implemented for various data source
-  * <data dir> is the directory where the data to be saved.
+  * name: is the name of backup
+  * type: is either 'f' or 'd' for file and directory. it depends on the implementation of callback functions
+  * backup callback, restore callback: is the bash callback function implemented for various data source
+  * data dir: is the directory where the data to be saved.
 
 example:
 BAK_LIST="mysql     d backupcb_mysql restorecb_mysql /usr/local/mysql/var/, confetc   f backupcb_files restorecb_files /etc/"
