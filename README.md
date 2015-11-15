@@ -120,6 +120,25 @@ restart cron:
     which service >/dev/null 2>&1 && service cron restart
 
 
+The backupped data files
+------------------------
+
+The name of the files/directories is combined with the prefix, name of backup, timestamp, backup types.
+So you can locate the required files easily, and recovery it either by software automately or by manual.
+
+
+
+Restore
+-------
+
+It's very easy to restore all of data, just use the script restore.sh, for example:
+
+    /backup/src/restore /backup/backup.conf
+
+It will search the files in the directory specified by DN_BAK in config file /backup/backup.conf,
+and then use the latest full/differential/incremental files to restore the data.
+
+
 The backup config file
 ----------------------
 
@@ -147,11 +166,4 @@ The backup list is a comma splitted list of the backup config block, the format 
 
 example:
 BAK_LIST="mysql     d backupcb_mysql restorecb_mysql /usr/local/mysql/var/, confetc   f backupcb_files restorecb_files /etc/"
-
-
-The backupped data files
-------------------------
-
-The name of the files/directories is combined with the prefix, name of backup, timestamp, backup types.
-So you can locate the required files easily, and recovery it either by software automately or by manual.
 
