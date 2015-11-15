@@ -5,8 +5,8 @@
 #   IPv4 address handle
 #   install functions for RedHat/CentOS/Ubuntu/Arch
 #
-# Copyright 2013 Yunhui Fu
-# License: GPL v3.0 or later
+# Author: Yunhui Fu <yhfudev@gmail.com>
+# License: MIT
 #####################################################################
 # detect if the ~/bin is included in environment variable $PATH
 #echo $PATH | grep "~/bin"

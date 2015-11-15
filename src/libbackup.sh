@@ -1,6 +1,9 @@
 #!/bin/bash
 # Backup database
-#   前提要求：安装了 uuidgen, xtrabackup, qpress
+#   You need to install uuidgen, xtrabackup, qpress
+#
+# Author: Yunhui Fu <yhfudev@gmail.com>
+# License: MIT
 #############################################################################
 my_getpath () {
     PARAM_DN="$1"
@@ -469,7 +472,7 @@ restorecb_mysql ()
         fi
         # restore
         if [ "${DB_LIST}" = "" ]; then
-            #   shutdown the whole DB
+            # shutdown the whole DB
             which systemctl >/dev/null 2>&1 && systemctl stop mysqld
             which service >/dev/null 2>&1 && service mysql stop
             # move the datadir to a safe place

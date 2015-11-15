@@ -4,8 +4,8 @@
 # config file reader for bash scripts:
 #   read_config_file
 #
-# Copyright 2014 Yunhui Fu
-# License: GPL v3.0 or later
+# Author: Yunhui Fu <yhfudev@gmail.com>
+# License: MIT
 #####################################################################
 
 # read config file from pipe

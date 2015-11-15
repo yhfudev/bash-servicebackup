@@ -1,6 +1,9 @@
 #!/bin/bash
 # Backup database and other files
 #   You need to install uuidgen, xtrabackup, qpress
+#
+# Author: Yunhui Fu <yhfudev@gmail.com>
+# License: MIT
 #############################################################################
 my_getpath () {
     PARAM_DN="$1"

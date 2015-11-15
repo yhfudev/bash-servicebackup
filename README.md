@@ -139,6 +139,44 @@ It will search the files in the directory specified by DN_BAK in config file /ba
 and then use the latest full/differential/incremental files to restore the data.
 
 
+### Restore MySQL by manual
+
+The software use xtrabackup to backup the data. You may need to sort the names of your backup directories,
+find a series directories in which the first dir name contains '0full', and others contains '1diff' and '2incr'.
+
+Uncompress the data first since all of the data are compressed, for example,
+
+    innobackupex --decompress backup-mysql-20150101210001-0full
+
+And then you may want to prepare the data by for all of directories except the last one,
+
+    innobackupex --apply-log --redo-only backup-mysql-20150101210001-0full
+    innobackupex --apply-log --redo-only --incremental-dir=backup-mysql-20150106210001-1diff backup-mysql-20150101210001-0full
+    innobackupex --apply-log --redo-only --incremental-dir=backup-mysql-20150107210001-2incr backup-mysql-20150101210001-0full
+    innobackupex --apply-log --incremental-dir=backup-mysql-20150109210001-2incr backup-mysql-20150101210001-0full              # this is the last one!
+
+and now restore the data,
+
+    # shutdown the whole DB
+    which systemctl >/dev/null 2>&1 && systemctl stop mysqld
+    which service >/dev/null 2>&1 && service mysql stop
+    # commit
+    innobackupex --apply-log backup-mysql-20150101210001-0full
+    # copy file to /var/lib/mysql
+    innobackupex --copy-back --force-non-empty-directories backup-mysql-20150101210001-0full
+
+### Restore common files by manual
+
+The software use the ctime of the file to find the updated files and compressed it to a tar.gz file.
+To restore the files, just to untar the files by the sequence of timestamp of the files.
+For example, the following lines shows how to untar the files to a tmp directory.
+
+    mdir -p tmp
+    tar -C tmp backup-fileetc-20150101210001-0full.tar.gz
+    tar -C tmp backup-fileetc-20150102210001-1diff.tar.gz
+    tar -C tmp backup-fileetc-20150103210001-2incr.tar.gz
+
+
 The backup config file
 ----------------------
 
@@ -167,3 +205,8 @@ The backup list is a comma splitted list of the backup config block, the format 
 example:
 BAK_LIST="mysql     d backupcb_mysql restorecb_mysql /usr/local/mysql/var/, confetc   f backupcb_files restorecb_files /etc/"
 
+
+License
+-------
+
+MIT
