@@ -172,9 +172,9 @@ To restore the files, just to untar the files by the sequence of timestamp of th
 For example, the following lines shows how to untar the files to a tmp directory.
 
     mdir -p tmp
-    tar -C tmp backup-fileetc-20150101210001-0full.tar.gz
-    tar -C tmp backup-fileetc-20150102210001-1diff.tar.gz
-    tar -C tmp backup-fileetc-20150103210001-2incr.tar.gz
+    tar -C tmp -xvf backup-fileetc-20150101210001-0full.tar.gz
+    tar -C tmp -xvf backup-fileetc-20150102210001-1diff.tar.gz
+    tar -C tmp -xvf backup-fileetc-20150103210001-2incr.tar.gz
 
 
 The backup config file
